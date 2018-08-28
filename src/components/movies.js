@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import {View} from 'react-native';
+import { Link } from "../Routing";
 import _ from "lodash";
 import { toast } from "react-native-toastify";
 import { getMovies, deleteMovie } from "../services/movieService";
 import { getGenres } from "../services/genreService";
 import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
-import ListGroup from "./common/listGroup";
 import MoviesTable from "./moviesTable";
 import SearchBox from "./searchBox";
+import {ListGroup} from '../components/ui';
 
 class Movies extends Component {
   state = {
@@ -97,22 +98,22 @@ class Movies extends Component {
   };
 
   render() {
-    const { length: count } = this.state.movies;
+    //const { length: count } = this.state.movies;
     const { currentPage, pageSize, sortColumn } = this.state;
     const { user } = this.props;
 
     const { totalCount, data: movies } = this.getPageData();
 
     return (
-      <div className="row">
-        <div className="col-3">
+      <View>
+        <View>
           <ListGroup
             items={this.state.genres}
             selectedItem={this.state.selectedGenre}
             onItemSelect={this.handleGenreSelect}
           />
-        </div>
-        <div className="col">
+        </View>
+        <View>
           {user && (
             <Link
               className="btn btn-primary"
@@ -137,8 +138,8 @@ class Movies extends Component {
             currentPage={currentPage}
             onPageChange={this.handlePageChange}
           />
-        </div>
-      </div>
+        </View>
+      </View>
     );
   }
 }

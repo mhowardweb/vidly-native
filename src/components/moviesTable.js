@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "../Routing";
 import auth from "../services/authService";
 import Like from "./common/like";
 import Table from "./common/table";
+import {Button} from './ui';
 
 class MoviesTable extends Component {
   columns = [
@@ -25,12 +26,12 @@ class MoviesTable extends Component {
   deleteColumn = {
     key: "delete",
     content: movie => (
-      <button
+      <Button
         onClick={() => this.props.onDelete(movie)}
         className="btn btn-danger btn-sm"
       >
         Delete
-      </button>
+      </Button>
     )
   };
 

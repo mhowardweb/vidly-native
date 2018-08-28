@@ -1,7 +1,8 @@
 import React from "react";
+import {Text} from 'react-native';
 
 const Rentals = () => {
-  return <h1>Rentals</h1>;
+  return <Text>Rentals</Text>;
 };
 
 export default Rentals;

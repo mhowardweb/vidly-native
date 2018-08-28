@@ -1,7 +1,8 @@
 import React from "react";
+import{Text} from 'react-native';
 
 const NotFound = () => {
-  return <h1>Not Found</h1>;
+  return <Text>Not Found</Text>;
 };
 
 export default NotFound;

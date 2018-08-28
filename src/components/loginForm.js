@@ -2,10 +2,9 @@ import React, {Component} from "react";
 import {View, Text} from 'react-native';
 
 import { Redirect } from "../Routing";
-import Joi from "react-native-joi";
-import {Card, CardSection} from './ui';
+//import Joi from "react-native-joi";
+import {Card, CardSection, Input, Button, Spinner} from './ui';
 import auth from "../services/authService";
-import Input from "./common/input";
 
 class LoginForm extends Component {
   state = {
@@ -16,14 +15,14 @@ class LoginForm extends Component {
     errors: {}
   };
 
-  schema = {
-    username: Joi.string()
-      .required()
-      .label("Username"),
-    password: Joi.string()
-      .required()
-      .label("Password")
-  };
+  // schema = {
+  //   username: Joi.string()
+  //     .required()
+  //     .label("Username"),
+  //   password: Joi.string()
+  //     .required()
+  //     .label("Password")
+  // };
 
   doSubmit = async () => {
     try {
@@ -40,6 +39,26 @@ class LoginForm extends Component {
     }
   };
 
+  renderButton() {
+    if (this.props.loading) {
+      return <Spinner size="large" />;
+    }
+
+    return (
+      <Button onPress={this.doSubmit.bind(this)}>
+        Login
+      </Button>
+    );
+  }
+
+  onUsernameChange(text) {
+    this.setState({ username: text });
+  }
+
+  onPasswordChange(text) {
+    this.setState({ password: text });
+  }
+
   render() {
     if (auth.getCurrentUser()) return <Redirect to="/" />;
 
@@ -49,23 +68,25 @@ class LoginForm extends Component {
         <Card>
           <CardSection>
             <Input
-              label='Email'
+              label='Username'
               placeholder='email@gmail.com'
-              value={this.state.username}
+              onChangeText={this.onUsernameChange.bind(this)}
             />
           </CardSection>
-          <CardSection>
-            <Input />
-          </CardSection>
-          <CardSection>
 
+          <CardSection>
+            <Input 
+              label='Password'
+              placeholder='password'
+              secureTextEntry= {true}
+              onChangeText={this.onPasswordChange.bind(this)}
+
+            />
           </CardSection>
-        
-        {/* <form onSubmit={this.handleSubmit}>
-          {this.renderInput("username", "Username")}
-          {this.renderInput("password", "Password", "password")}
-          {this.renderButton("Login")}
-        </form> */}
+
+          <CardSection>
+            {this.renderButton()}
+          </CardSection>
         </Card>
       </View>
     );
