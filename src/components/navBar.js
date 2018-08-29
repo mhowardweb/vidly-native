@@ -22,39 +22,39 @@ class NavBar extends Component {
 
   render() {
     const { user } = this.state;
-
+    const {menu, menuItem, container} = styles;
     return (
 
   <Router>
-    <View style={styles.container}>
-      <View style={{backgroundColor: '#f0f0f0'}}>
-        <View>
+    <View style={container}>
+      
+        <View style={menu}>
           <Link to="/movies">
-            <Text>Movies</Text>
+            <Text style={menuItem}>Movies</Text>
           </Link>
           <Link to="/customers">
-            <Text>Customers</Text>
+            <Text style={menuItem}>Customers</Text>
           </Link>
           <Link to="/rentals">
-            <Text>Rentals</Text>
+            <Text style={menuItem}>Rentals</Text>
           </Link>
           {!user && (
             <View>
               <Link to="/login">
-                <Text>Login</Text>
+                <Text style={menuItem}>Login</Text>
               </Link>
               <Link to="/register">
-                <Text>Register</Text>
+                <Text style={menuItem}>Register</Text>
               </Link>
             </View>
           )}
           {user && (
             <View>
               <Link to="/profile">
-                <Text>{user.name}</Text>
+                <Text style={menuItem}>{user.name}</Text>
               </Link>
               <Link to="/logout">
-                <Text>Logout</Text>
+                <Text style={menuItem}>Logout</Text>
               </Link>
             </View>
           )}
@@ -74,7 +74,7 @@ class NavBar extends Component {
             <Redirect from="/" exact to="/movies" />
             <Redirect to="/not-found" />
           </Switch>
-        </View>
+        
   
     </View>
   </Router>
@@ -85,16 +85,27 @@ class NavBar extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 25,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    marginTop: 20,
     padding: 10,
   },
-  header: {
-    fontSize: 20,
-    marginTop: 20,
+  menu: {
+   
+    
+    
   },
-  sidebarText: {
-    fontWeight: 'bold',
-    textAlign: 'center',
+  menuItem: {
+    paddingBottom: 20,
+    paddingTop: 20,
+    justifyContent: 'space-around',
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
+    position: 'relative',
+    height: 50,
+    margin: 50
   }
 })
 

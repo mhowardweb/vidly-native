@@ -13,4 +13,4 @@ const Like = ({ liked, onClick }) => {
   );
 };
 
-export default Like;
+export {Like};

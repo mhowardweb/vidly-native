@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {View, Text} from 'react-native';
+import { colors } from '../ui/config';
 
 class TableHeader extends Component {
   raiseSort = path => {
@@ -21,21 +23,38 @@ class TableHeader extends Component {
   };
 
   render() {
+    const { container, tableHeaderText} = styles;
     return (
-      <thead>
-        <tr>
+         <View style={container}>
           {this.props.columns.map(column => (
-            <th
+            <Text
+              style={tableHeaderText}
               className="clickable"
               key={column.path || column.key}
               onClick={() => this.raiseSort(column.path)}
             >
               {column.label} {this.renderSortIcon(column)}
-            </th>
+            </Text>
           ))}
-        </tr>
-      </thead>
+        </View>
+      
     );
+  }
+}
+
+const styles = {
+  tableHeaderText: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#fff'
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-around',
+    padding: 5,
+    backgroundColor: colors.secondary,
   }
 }
 

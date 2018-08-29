@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {View} from 'react-native';
+import {View, Picker} from 'react-native';
 import { Link } from "../Routing";
 import _ from "lodash";
 import { toast } from "react-native-toastify";
@@ -9,7 +9,6 @@ import Pagination from "./common/pagination";
 import { paginate } from "../utils/paginate";
 import MoviesTable from "./moviesTable";
 import SearchBox from "./searchBox";
-import {ListGroup} from '../components/ui';
 
 class Movies extends Component {
   state = {
@@ -103,15 +102,21 @@ class Movies extends Component {
     const { user } = this.props;
 
     const { totalCount, data: movies } = this.getPageData();
+    
+    const pickGenre = this.state.genres.map((s, i) => {
+      return <Picker.Item key={i} value={s.name} label={s.name} />
+      
+    });
 
     return (
       <View>
         <View>
-          <ListGroup
-            items={this.state.genres}
-            selectedItem={this.state.selectedGenre}
-            onItemSelect={this.handleGenreSelect}
-          />
+        <Picker
+          selectedValue={this.state.selectedGenre || 'All Genres'}
+          style={{ height: 30, width: 200 }}
+          onValueChange={this.handleGenreSelect}>
+            {pickGenre}
+        </Picker>
         </View>
         <View>
           {user && (

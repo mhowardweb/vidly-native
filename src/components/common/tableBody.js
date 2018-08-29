@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import {View, Text} from 'react-native';
 import _ from "lodash";
+import { colors } from '../ui/config';
 
 class TableBody extends Component {
   renderCell = (item, column) => {
@@ -16,18 +18,40 @@ class TableBody extends Component {
     const { data, columns } = this.props;
 
     return (
-      <tbody>
+      <View style={styles.container}>
         {data.map(item => (
-          <tr key={item._id}>
+          <View style={styles.content} key={item._id}>
             {columns.map(column => (
-              <td key={this.createKey(item, column)}>
+              <Text style={styles.tableHeaderText} key={this.createKey(item, column)}>
                 {this.renderCell(item, column)}
-              </td>
+              </Text>
             ))}
-          </tr>
+          </View>
         ))}
-      </tbody>
+      </View>
     );
+  }
+}
+
+const styles = {
+  tableHeaderText: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#000'
+  },
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'space-around',
+    padding: 5,
+    backgroundColor: '#fff',
+  },
+  content: {
+    
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-around'
   }
 }
 

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "../Routing";
 import auth from "../services/authService";
-import Like from "./common/like";
 import Table from "./common/table";
-import {Button} from './ui';
+import {Button, Like} from './ui';
 
 class MoviesTable extends Component {
   columns = [
